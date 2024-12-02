@@ -35,21 +35,22 @@ fn parse_pairs(data: Vec<String>) -> Result<(Vec<i32>, Vec<i32>)> {
     let mut second_set: Vec<i32> = Vec::new();
 
     for line in data {
-        let pair: Vec<i32> = line
+        let parts: Vec<i32> = line
             .split_ascii_whitespace()
             .map(|x| {
                 x.parse::<i32>().map_err(|_| {
-                    Error::custom(format!("failed to convert ASCII value '{}' to i32", x))
+                    Error::custom(format!("Failed to convert ASCII value '{}' to i32", x))
                 })
             })
             .collect::<Result<Vec<i32>>>()?;
 
-        if pair.len() == 2 {
-            pair.into_iter().enumerate().for_each(|(i, n)| match i {
-                0 => first_set.push(n),
-                1 => second_set.push(n),
-                _ => (),
-            });
+        if let [first, second] = parts.as_slice() {
+            first_set.push(*first);
+            second_set.push(*second);
+        } else {
+            return Err(Error::custom(
+                "Each line must contain exactly two integers. Check input data",
+            ));
         }
     }
 
