@@ -1,4 +1,5 @@
 mod day_1;
+mod day_2;
 mod error;
 mod util;
 
@@ -10,6 +11,10 @@ fn main() -> Result<()> {
     let d1p1 = day_1::part1("./data/day_1.txt")?;
     let d1p2 = day_1::part2("./data/day_1.txt")?;
     println!("Day 1\nPart 1: {d1p1}\tPart 2: {d1p2}\n");
+
+    let d2p1 = day_2::part1("./data/day_2.txt")?;
+    let d2p2 = day_2::part2("./data/day_2.txt")?;
+    println!("Day 2\nPart 1: {d2p1}\tPart 2: {d2p2}\n");
 
     Ok(())
 }
